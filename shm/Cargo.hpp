@@ -30,13 +30,6 @@ protected:
     size_t basePrice_;
 };
 
-bool operator==(const Cargo& lhs, const Cargo& rhs)
-{
-    return lhs.amount_ == rhs.amount_;
-}
-
-bool operator!=(const Cargo& lhs, const Cargo& rhs)
-{
-    return lhs.amount_ != rhs.amount_;
-}
+bool operator==(const Cargo& lhs, const Cargo& rhs);
+bool operator!=(const Cargo& lhs, const Cargo& rhs);
 

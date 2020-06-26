@@ -4,7 +4,9 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+
 #include "Island.hpp"
+#include "Coordinates.hpp"
 
 class Map
 {

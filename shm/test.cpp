@@ -6,6 +6,8 @@
 #include "Island.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
+#include "Ship.hpp"
+#include "Coordinates.hpp"
 #include "gtest/gtest.h"
 
 TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
@@ -79,7 +81,6 @@ TEST(Map, getIslandShouldRTeturnIsland)
 {
     Map map_;
     std::vector<Island> islands = map_.getIslands();
-    Island island_ = islands[4];
     Coordinates corr = islands[4].getPosition();
 
     EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
