@@ -9,25 +9,15 @@
 class Ship : public Observer
 {
 public:
-    Ship(Subject& subject) : id_(-1), Observer(subject)  {}
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Subject& subject)
-        : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), Observer(subject) 
-    {
-    }
-    Ship(int maxCrew, int speed, size_t id, Subject& subject) : Ship(0, maxCrew, speed, "", id, subject)   {}
+    Ship(Subject& subject);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Subject& subject);
+    Ship(int maxCrew, int speed, size_t id, Subject& subject);
 
-    void setName(const std::string& name) { name_ = name; }
+    void setName(const std::string& name);
 
-    Ship& operator-=(size_t num)
-    {
-        crew_ -= num;
-        return *this;
-    }
-    Ship& operator+=(size_t num)
-    {
-        crew_ += num;
-        return *this;
-    }
+    Ship& operator-=(size_t num);
+    Ship& operator+=(size_t num);
+
     void Update(const std::string& message_from_subject) override
     {
         PrintMe(message_from_subject);
