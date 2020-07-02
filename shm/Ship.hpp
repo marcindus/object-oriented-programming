@@ -25,7 +25,7 @@ public:
 
     void PrintMe(const std::string& msg)
     {
-        std::cout << "I am Ship " << name_ << " message received: "<< msg;
+        std::cout << "I am Ship " << name_ << " message received: "<< msg << "\n";
     }
 
     [[nodiscard]] size_t getCapacity() const { return capacity_; }
