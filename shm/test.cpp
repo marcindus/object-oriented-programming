@@ -5,6 +5,7 @@
 #include "Island.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
+#include "Subject.hpp"
 #include "gtest/gtest.h"
 
 TEST(cargo, cargoShuldNotBeZero)
@@ -46,7 +47,9 @@ TEST(island, twoIslandsPositionsShouldBeEqual)
 
 TEST(player, newSpaceWasSet)
 {
-    Ship ship;
+    Subject sub;
+    Ship ship(sub);
+
     size_t space = 10;
     Player player(ship, 0, space);
     EXPECT_EQ(player.getAvailableSpace(), space);
@@ -54,7 +57,8 @@ TEST(player, newSpaceWasSet)
 
 TEST(player, newMoneyAmountWasSet)
 {
-    Ship ship;
+    Subject sub;
+    Ship ship(sub);
     Player player(ship, 0, 0);
     size_t money = 10;
     player.setMoney(money);
