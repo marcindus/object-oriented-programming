@@ -12,7 +12,8 @@ void ClientCode() {
   subject->CreateMessage("Hello World! :D");
   subject->CreateMessage("The weather is hot today! :p");
 
-  //ship1->RemoveMeFromTheList();
+  ship1.RemoveMeFromTheList();
+  subject->SomeBusinessLogic();
 
   delete subject;
 }
