@@ -3,32 +3,86 @@
 
 #include "Cargo.hpp"
 #include "Island.hpp"
+#include "Item.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
 #include "gtest/gtest.h"
 
-TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
+TEST(item, TwoItemsWithDifferentAmountShouldNotBeEqualWithGetters)
 {
-    Cargo cargoA, cargoB;
-    cargoA += 10;
-    cargoB += 10;
-    ASSERT_EQ(cargoA, cargoB);
+    Item itemA(10, "itemA", 1, Item::Rarity::common), itemB(100, "itemB", 2, Item::Rarity::common);
+    EXPECT_FALSE(itemA.GetAmount() == itemB.GetAmount());
+    itemA += 90;
+    EXPECT_EQ(itemA.GetAmount(), itemB.GetAmount());
 }
 
-TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqual)
+TEST(item, TwoIdenticalItemsShouldBeEqualWithEqualOperator)
 {
-    Cargo cargoA, cargoB;
-    cargoA += 10;
-    cargoB += 100;
-    ASSERT_NE(cargoA, cargoB);
+    Item itemA(10, "item", 1, Item::Rarity::common), itemB(10, "item", 1, Item::Rarity::common);
+    EXPECT_TRUE(itemA == itemB);
+    EXPECT_FALSE(itemA != itemB);
 }
 
-TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqualWithGetters)
+TEST(item, TwoIdenticalItemsWithDifferenAmountShouldBeNotEqualWithEqualOperator)
 {
-    Cargo cargoA(10, "CargoA", 1), cargoB(100, "CargoB", 2);
-    EXPECT_FALSE(cargoA.GetAmount() == cargoB.GetAmount());
-    cargoA += 90;
-    EXPECT_EQ(cargoA.GetAmount(), cargoB.GetAmount());
+    Item itemA(100, "item", 1, Item::Rarity::common), itemB(10, "item", 1, Item::Rarity::common);
+    EXPECT_FALSE(itemA == itemB);
+    EXPECT_TRUE(itemA != itemB);
+}
+
+TEST(item, TwoIdenticalItemsWithDifferenNameShouldBeNotEqualWithEqualOperator)
+{
+    Item itemA(10, "itemA", 1, Item::Rarity::common), itemB(10, "itemB", 1, Item::Rarity::common);
+    EXPECT_FALSE(itemA == itemB);
+    EXPECT_TRUE(itemA != itemB);
+}
+
+TEST(item, TwoIdenticalItemsWithDifferenBasePriceShouldBeNotEqualWithEqualOperator)
+{
+    Item itemA(10, "item", 10, Item::Rarity::common), itemB(10, "item", 1, Item::Rarity::common);
+    EXPECT_FALSE(itemA == itemB);
+    EXPECT_TRUE(itemA != itemB);
+}
+
+TEST(item, TwoIdenticalItemsWithDifferenRarityShouldBeNotEqualWithEqualOperator)
+{
+    Item itemA(10, "item", 1, Item::Rarity::epic), itemB(10, "item", 1, Item::Rarity::common);
+    EXPECT_FALSE(itemA == itemB);
+    EXPECT_TRUE(itemA != itemB);
+}
+
+TEST(item, TwoItemsWithDifferentAmountShouldNotBeEqualWithEqualOperator)
+{
+    Item itemA(10, "item", 10, Item::Rarity::common), itemB(100, "item", 10, Item::Rarity::common);
+    EXPECT_FALSE(itemA == itemB);
+    EXPECT_TRUE(itemA != itemB);
+}
+
+TEST(item, TwoItemsWithDifferentAllPropertiesShouldNotBeEqualWithEqualOperator)
+{
+    Item itemA(10, "itemA", 1, Item::Rarity::common), itemB(100, "itemB", 2, Item::Rarity::legendary);
+    EXPECT_FALSE(itemA == itemB);
+    EXPECT_TRUE(itemA != itemB);
+}
+
+TEST(item, GetRarityShouldReturnProperValue)
+{
+    Item itemA(10, "item", 1, Item::Rarity::rare);
+    EXPECT_EQ(itemA.GetRarity(), Item::Rarity::rare);
+}
+
+TEST(item, SubstractFromOperatorSubstractAmount)
+{
+    Item itemA(10, "item", 1, Item::Rarity::rare);
+    itemA -= 5;
+    EXPECT_EQ(itemA.GetAmount(), 5);
+}
+
+TEST(item, AddToOperatorIncreaseAmount)
+{
+    Item itemA(10, "item", 1, Item::Rarity::rare);
+    itemA += 5;
+    EXPECT_EQ(itemA.GetAmount(), 15);
 }
 
 TEST(island, twoIslandsPositionsShouldBeEqual)
