@@ -86,3 +86,7 @@ std::string Fruit::GetDescription() const
     return "Name: " + name_ + " Amount: " + std::to_string(amount_) + " Price: " + std::to_string(this->GetPrice())
            + " Expiry date: " + std::to_string(expiry_date_);
 }
+std::string Fruit::GetUniqueStat() const
+{
+    return std::to_string(GetExpiryDate());
+}

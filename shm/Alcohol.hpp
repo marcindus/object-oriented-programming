@@ -25,6 +25,7 @@ public:
     bool operator!=(const Cargo& cargo) const override;
 
     [[nodiscard]] size_t GetPercentage() const;
+    [[nodiscard]] std::string GetUniqueStat() const;
     size_t NextDay();
 
 private:

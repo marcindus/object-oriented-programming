@@ -24,6 +24,7 @@ public:
     [[nodiscard]] size_t GetAmount() const override;
     [[nodiscard]] size_t GetBasePrice() const override;
     [[nodiscard]] Item::Rarity GetRarity() const;
+    [[nodiscard]] std::string GetUniqueStat() const;
     [[nodiscard]] std::string GetDescription() const override;
     [[nodiscard]] std::string GetRarityDesription() const;
 

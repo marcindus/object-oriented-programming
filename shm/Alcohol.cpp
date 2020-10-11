@@ -70,3 +70,7 @@ size_t Alcohol::NextDay()
 {
     return amount_;
 }
+std::string Alcohol::GetUniqueStat() const
+{
+    return std::to_string(GetPercentage());
+}

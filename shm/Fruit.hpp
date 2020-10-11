@@ -26,6 +26,7 @@ public:
 
     [[nodiscard]] size_t GetTimeElapsed() const;
     [[nodiscard]] size_t GetExpiryDate() const;
+    [[nodiscard]] std::string GetUniqueStat() const;
     void NextDay();
 
 private:

@@ -4,7 +4,9 @@
 #include <iostream>
 #include <algorithm>
 #include <random>
+#include <iomanip>
 
+#include "Item.hpp"
 #include "Store.hpp"
 #include "Alcohol.hpp"
 #include "Fruit.hpp"
@@ -92,4 +94,39 @@ void Store::GenerateCargo()
     cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "MahakamskiSpirytus", 10, 197));
 
 }
+std::ostream& operator<<(std::ostream& out, const Store& store)
+{
+    const std::string horizontalSeparator(80, '=');
+    size_t i = 0;
 
+    out << horizontalSeparator
+        << "\n"
+        << "|| AVAILABLE PRODUCTS "
+        << std::setw(25) << "| QTY "
+        << "| BUY PRICE "
+        << "| SELL PRICE "
+        << "||\n"
+        << horizontalSeparator << "\n";
+
+    for (const auto& el : store.cargo_) {
+        std::string uniqueStat;
+        out << "|| "
+            << std::setw(2) << ++i << ". "
+            << std::setw(15) << std::left << el->GetName();
+        if (typeid(*el) == typeid(Alcohol)) {
+            uniqueStat += " (" + el->GetUniqueStat() + "% vol)";
+        }
+        else if (typeid(*el) == typeid(Fruit)) {
+            uniqueStat += " (" + el->GetUniqueStat() + " days to rot)";
+        }
+        else if (typeid(*el) == typeid(Item)) {
+            uniqueStat += " (" + el->GetUniqueStat() + ")";
+        }
+        out << std::setw(18) << std::left << uniqueStat << " | ";
+        out << std::setw(3) << std::right << el->GetAmount() << " | "
+            << std::setw(10) << std::right << el->GetPrice() << " ||\n";
+    }
+    out << horizontalSeparator << "\n";
+
+    return out;
+}

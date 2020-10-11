@@ -84,3 +84,7 @@ std::string Item::GetRarityDesription() const
             throw std::invalid_argument("Rarity type not implemented yet");
     };
 }
+std::string Item::GetUniqueStat() const
+{
+    return GetRarityDesription();
+}
